@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Project CLaM</string>
-    <string name="map_key" translatable="false">AIzaSyD3v8Ip-6xBovbjMBLVhb54JiDjqIyv9bM</string>
+    <string name="map_key" translatable="false">ENTER_KEY_HERE</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 </resources>
