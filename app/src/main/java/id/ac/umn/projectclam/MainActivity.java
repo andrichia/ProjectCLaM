@@ -11,6 +11,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -109,6 +110,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_delete:
                 Intent deleteActivityIntent = new Intent(MainActivity.this, DeleteActivity.class);
                 startActivity(deleteActivityIntent);
+                break;
+            case R.id.nav_phone:
+                String number = "119";
+                Intent emergencyCall = new Intent(Intent.ACTION_CALL);
+                emergencyCall.setData(Uri.parse("tel:" + number));
+                if(ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED){
+                    break;
+                }
+                startActivity(emergencyCall);
                 break;
             case R.id.nav_about:
                 Intent aboutusActivityIntent = new Intent(MainActivity.this, AboutUsActivity.class);

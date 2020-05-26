@@ -9,18 +9,23 @@
 
         <item
             android:id="@+id/nav_create"
-            android:title="Create"
+            android:title="Tambah Lokasi"
             android:icon="@drawable/create_icon"/>
 
         <item
             android:id="@+id/nav_update"
-            android:title="Update"
+            android:title="Update Lokasi"
             android:icon="@drawable/update_icon"/>
 
         <item
             android:id="@+id/nav_delete"
-            android:title="Delete"
+            android:title="Hapus Lokasi"
             android:icon="@drawable/delete_icon"/>
+
+        <item
+            android:id="@+id/nav_phone"
+            android:title="Panggilan Darurat"
+            android:icon="@drawable/phone_icon"/>
 
         <item
             android:id="@+id/nav_about"
