@@ -20,17 +20,19 @@
         android:roundIcon="@drawable/clam"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CreateActivity"></activity>
+        <activity android:name=".CreateActivity" />
         <activity android:name=".DeleteActivity" />
         <activity android:name=".UpdateActivity" />
         <activity android:name=".AboutUsActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"/>
+        <activity android:name=".LoadingScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- Maps Android Key -->
+        </activity>
+        <!-- Maps Android Key -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/map_key" />
