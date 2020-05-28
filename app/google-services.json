@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1078985184000",
+    "firebase_url": "https://projectclam-3f660.firebaseio.com",
+    "project_id": "projectclam-3f660",
+    "storage_bucket": "projectclam-3f660.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1078985184000:android:da980aa20338f9098e19e5",
+        "android_client_info": {
+          "package_name": "id.ac.umn.projectclam"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1078985184000-vf5n8anduu1ekno451b9eutd626ehp78.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCYO3WudsbqKS_9ju3GFlZI5w0VFB4e_g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1078985184000-vf5n8anduu1ekno451b9eutd626ehp78.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
