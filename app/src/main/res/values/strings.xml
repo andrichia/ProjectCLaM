@@ -3,4 +3,9 @@
     <string name="map_key" translatable="false">AIzaSyDOkl2SdLMOhPPYrih-T-bMiSNJC2G0CWQ</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="report_your_location">Report your location</string>
+    <string name="question">Apakah anda merasakan gejala Covid-19?(Demam, Sesak Napas dan sebagainya)</string>
+    <string name="instruction">Jika iya, laporkan lokasi anda agar masyarakat sekitar dapat menjaga kesehatan mereka</string>
+    <string name="update">Update your condition</string>
+    <string name="delete">Delete your report</string>
 </resources>
