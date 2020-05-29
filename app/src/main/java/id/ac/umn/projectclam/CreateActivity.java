@@ -116,7 +116,6 @@ public class CreateActivity extends AppCompatActivity {
         report.put("status", "yellow");
 
 
-        db.collection("report").document(phone)
-                .set(report);
+        db.collection("report").document(phone).set(report);
     }
 }
