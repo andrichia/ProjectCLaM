@@ -83,22 +83,27 @@ public class UpdateActivity extends AppCompatActivity {
                     .show();
         }
 
-        Task<Location> task = fusedLocationProviderClient.getLastLocation();
-        task.addOnSuccessListener(new OnSuccessListener<Location>() {
-            @Override
-            public void onSuccess(Location location) {
-                if (location != null){
-                    currentlocation = location;
-                    longitude = currentlocation.getLongitude();
-                    latitude = currentlocation.getLatitude();
-                }
-            }
-        });
-        GeoPoint curr = new GeoPoint(latitude, longitude);
+//        Task<Location> task = fusedLocationProviderClient.getLastLocation();
+//        task.addOnSuccessListener(new OnSuccessListener<Location>() {
+//            @Override
+//            public void onSuccess(Location location) {
+//                if (location != null){
+//                    currentlocation = location;
+//                    longitude = currentlocation.getLongitude();
+//                    latitude = currentlocation.getLatitude();
+//                }
+//            }
+//        });
+//        GeoPoint curr = new GeoPoint(latitude, longitude);
+        lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+        Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        longitude = location.getLongitude();
+        latitude = location.getLatitude();
         TelephonyManager telephonyManager = (TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);
         assert telephonyManager != null;
         String phone = telephonyManager.getDeviceId();
-        report.put("location", curr);
+        report.put("latitude", latitude);
+        report.put("longitude", longitude);
         report.put("phone", phone);
         report.put("status", "red");
 
