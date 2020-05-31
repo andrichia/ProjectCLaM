@@ -16,6 +16,7 @@ import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -104,10 +105,15 @@ public class UpdateActivity extends AppCompatActivity {
         String phone = telephonyManager.getDeviceId();
         report.put("latitude", latitude);
         report.put("longitude", longitude);
-        report.put("phone", phone);
         report.put("status", "red");
 
 
-        db.collection("report").document(phone).set(report);
+        if(db.collection("report").document(phone).get().equals(null)){
+            Toast.makeText(getApplicationContext(), "Laporan belum ada", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            db.collection("report").document(phone).update(report);
+            Toast.makeText(getApplicationContext(), "Laporan berhasil di masukkan", Toast.LENGTH_SHORT).show();
+        }
     }
 }

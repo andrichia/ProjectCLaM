@@ -11,6 +11,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.gms.location.LocationServices;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -38,6 +39,14 @@ public class DeleteActivity extends AppCompatActivity {
         TelephonyManager telephonyManager = (TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);
         assert telephonyManager != null;
         String phone = telephonyManager.getDeviceId();
-        db.collection("report").document(phone).delete();
+
+        if(db.collection("report").document(phone).get().equals(null)){
+            Toast.makeText(getApplicationContext(), "Laporan belum ada", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            db.collection("report").document(phone).delete();
+            Toast.makeText(getApplicationContext(), "Laporan berhasil di hapus", Toast.LENGTH_SHORT).show();
+        }
+
     }
 }

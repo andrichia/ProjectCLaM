@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -33,6 +34,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.GeoPoint;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -42,7 +44,7 @@ public class CreateActivity extends AppCompatActivity {
     private static final String TAG = "CreateActivity";
     private static final int REQUEST_CODE = 101;
     private static FirebaseFirestore db;
-    private static FusedLocationProviderClient fusedLocationProviderClient;
+//    private static FusedLocationProviderClient fusedLocationProviderClient;
     private static boolean gps_enabled;
     private static boolean network_enabled;
     private static Location currentlocation;
@@ -56,13 +58,11 @@ public class CreateActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create);
         Log.d(TAG, "pre-db");
         db = FirebaseFirestore.getInstance();
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
-
-        Log.d(TAG, "Testload");
+//        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
     }
 
-    public void warning(View v){
-        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+    public void warning(View v) {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
             return;
         }
@@ -70,19 +70,21 @@ public class CreateActivity extends AppCompatActivity {
 
         final Context context = this;
 
-        LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+        LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         gps_enabled = false;
         network_enabled = false;
 
         try {
             gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
-        } catch(Exception ex) {}
+        } catch (Exception ex) {
+        }
 
         try {
             network_enabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-        } catch(Exception ex) {}
+        } catch (Exception ex) {
+        }
 
-        if(!gps_enabled && !network_enabled) {
+        if (!gps_enabled && !network_enabled) {
             // notify user
             new AlertDialog.Builder(context)
                     .setMessage("Location service is not enabled")
@@ -92,7 +94,7 @@ public class CreateActivity extends AppCompatActivity {
                             context.startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
                         }
                     })
-                    .setNegativeButton("Cancel",null)
+                    .setNegativeButton("Cancel", null)
                     .show();
         }
 
@@ -109,7 +111,7 @@ public class CreateActivity extends AppCompatActivity {
 //        });
 //        GeoPoint curr = new GeoPoint(latitude, longitude);
 
-        lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+        lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         longitude = location.getLongitude();
         latitude = location.getLatitude();
@@ -123,7 +125,12 @@ public class CreateActivity extends AppCompatActivity {
         report.put("phone", phone);
         report.put("status", "yellow");
 
-
-        db.collection("report").document(phone).set(report);
+        if (db.collection("report").document(phone).get().equals(null)) {
+            Toast.makeText(getApplicationContext(), "Laporan gagal di masukkan", Toast.LENGTH_SHORT).show();
+        } else {
+            db.collection("report").document(phone).set(report);
+            Toast.makeText(getApplicationContext(), "Laporan berhasil di masukkan", Toast.LENGTH_SHORT).show();
+        }
     }
+
 }
